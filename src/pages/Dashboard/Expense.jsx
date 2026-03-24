@@ -64,6 +64,7 @@ const Expense = () => {
         }
 
         try {
+            setOpenAddExpenseModal(false)
             await axoisInstance.post(API_PATHS.EXPENSE.ADD_EXPENSE, {
                 category,
                 amount,
@@ -71,10 +72,10 @@ const Expense = () => {
                 icon
             })
 
-            setOpenAddExpenseModal(false)
             toast.success("Expense added successfully")
             fetchExpenseDetails()
         } catch (err) {
+            setOpenAddExpenseModal(true)
             console.error(
                 "Error adding expense:",
                 err.response?.data?.message || err.message

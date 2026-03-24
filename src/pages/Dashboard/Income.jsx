@@ -63,6 +63,7 @@ const Income = () => {
         }
 
         try {
+            setOpenAddIncomeModal(false)
             await axoisInstance.post(API_PATHS.INCOME.ADD_INCOME, {
                 source,
                 amount,
@@ -70,10 +71,10 @@ const Income = () => {
                 icon
             })
 
-            setOpenAddIncomeModal(false)
             toast.success("Income added successfully")
             fetchIncomeDetails()
         } catch (err) {
+            setOpenAddIncomeModal(true)
             console.error(
                 "Error adding income:",
                 err.response?.data?.message || err.message
